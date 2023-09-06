@@ -23,7 +23,7 @@
                             
                             <a href="#"
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                                *ngIf="authService.getAccessToken()">Photos</a>
+                                *ngIf="authService.isAuth()">Photos</a>
                             <a href="#"
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">About</a>
                             
@@ -36,7 +36,7 @@
                     <div class="ml-4 flex items-center md:ml-6">
                         <button type="button"
                             class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                            *ngIf="authService.getAccessToken()">
+                            *ngIf="authService.isAuth()">
                             <span class="absolute -inset-1.5"></span>
                             <span class="sr-only">View notifications</span>
                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -45,11 +45,11 @@
                                     d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
                             </svg>
                         </button>
-                        <a routerLink="/user/signin" class="bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" *ngIf="!authService.getAccessToken()">Sign In</a>
-                        <a routerLink="/user/signup" class="bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" *ngIf="!authService.getAccessToken()">Sign Up</a>
+                        <a routerLink="/user/signin" class="bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" *ngIf="!authService.isAuth()">Sign In</a>
+                        <a routerLink="/user/signup" class="bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" *ngIf="!authService.isAuth()">Sign Up</a>
                         <!-- Profile dropdown -->
 
-                        <div class="relative ml-3" *ngIf="authService.getAccessToken()">
+                        <div class="relative ml-3" *ngIf="authService.isAuth()">
                             <div>
                                 <button (click)="toggleMenu()" type="button"
                                     class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -83,8 +83,8 @@
                                     id="user-menu-item-0">Your Profile</a>
                                 <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
                                     id="user-menu-item-1">Settings</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
-                                    id="user-menu-item-2">Sign out</a>
+                                <button (click)="this.authService.signout()" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                                    id="user-menu-item-2">Sign out</button>
                             </div>
                         </div>
                     </div>
@@ -125,14 +125,14 @@
                 
                 <a href="#"
                     class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-                    *ngIf="authService.getAccessToken()">Photos</a>
+                    *ngIf="authService.isAuth()">Photos</a>
                 <a href="#"
                     class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">About</a>
                 
             </div>
             <div class="border-t border-gray-700 pb-3 pt-4"
                 >
-                <div class="flex items-center px-5" *ngIf="authService.getAccessToken()">
+                <div class="flex items-center px-5" *ngIf="authService.isAuth()">
                     <div class="flex-shrink-0">
                         <img class="h-10 w-10 rounded-full"
                             src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
@@ -154,22 +154,22 @@
                     </button>
                 </div>
                 <div class="mt-3 space-y-1 px-2">
-                    <div *ngIf="!authService.getAccessToken()">
+                    <div *ngIf="!authService.isAuth()">
                         
                         <a routerLink="/user/signin"
                             class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Sign In</a>
                         <a routerLink="/user/signup"
                             class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Sign Up</a>
                     </div>
-                    <div *ngIf="authService.getAccessToken()">
+                    <div *ngIf="authService.isAuth()">
                         <a href="#"
                             class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Your
                             Profile</a>
                         <a href="#"
                             class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Settings</a>
-                        <a href="#"
+                        <button (click)="this.authService.signout()"
                             class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Sign
-                            out</a>
+                            out</button>
                     </div>
                     
                 </div>

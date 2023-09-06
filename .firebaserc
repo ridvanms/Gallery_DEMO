@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "blog1-fb2f6": {
+      "hosting": {
+        "Gallery_DEMO": [
+          "blog1-fb2f6"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "blog1-fb2f6"
+  }
+}

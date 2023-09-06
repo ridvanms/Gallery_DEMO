@@ -9,9 +9,18 @@ import { RouterModule } from '@angular/router';
 import { AuthModule } from './auth/auth.module';
 import {HttpClientModule} from "@angular/common/http"
 import { UserModule } from './user/user.module';
+
+
+import { environment } from '../environments/environment';
+import {AngularFireModule} from "@angular/fire/compat"
+import {AngularFireAuthModule} from "@angular/fire/compat/auth"
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
+
+    
 @NgModule({
   declarations: [
     AppComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -20,6 +29,8 @@ import { UserModule } from './user/user.module';
     AuthModule,
     HttpClientModule,
     UserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

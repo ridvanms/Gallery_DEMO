@@ -10,18 +10,19 @@ import { CommonModule } from '@angular/common';
 
 const routes:Routes = [
   {
-    path:'user/signin',
+    path:'signin',
     component:SigninComponent
   },
   {
-    path:'user/signup',
+    path:'signup',
     component:SignupComponent
   },
   {
-    path:'user/profile',
+    path:'profile',
     canActivate:[AuthGuardService],
     component:ProfileComponent
   }
+  
 ]
 
 

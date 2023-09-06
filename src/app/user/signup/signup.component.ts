@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -9,6 +10,10 @@ import { FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms'
 export class SignupComponent implements OnInit {
   signUpForm: FormGroup | any;
 
+
+  constructor(
+    private authService:AuthService
+  ){}
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
       username: new FormControl('', [Validators.required]),
@@ -21,12 +26,14 @@ export class SignupComponent implements OnInit {
  
 
   onSubmit() {
-    const password = this.signUpForm.value.password
+    const password = this.signUpForm.value['password']
     const confirmPassword = this.signUpForm.value['confirmPassword']
     
     if(password != confirmPassword) return alert('Passwords do not match!')
     if (this.signUpForm.valid) {
-      console.log(this.signUpForm.value);
+      const email = this.signUpForm.value['email']
+
+      this.authService.signup(email,password)
     }
   }
 }

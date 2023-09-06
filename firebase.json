@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "Gallery_DEMO",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}
